@@ -7,6 +7,7 @@ use App\Models\Objetivo;
 use Illuminate\Http\Request;
 use App\Models\Participante;
 use App\Models\Colaborador;
+use App\Models\Convidado;
 
 class ReuniaoController extends Controller
 {
@@ -95,8 +96,11 @@ class ReuniaoController extends Controller
     {
         $reuniao = Reuniao::findOrFail($id);
         $participantes = $reuniao->participantes()->with('colaborador')->get();
-        return view('reuniao.participantes', compact('reuniao', 'participantes'));
+        $convidados = $reuniao->convidados()->get(); // Assumindo que há um relacionamento 'convidados' definido no modelo Reuniao
+    
+        return view('reuniao.participantes', compact('reuniao', 'participantes', 'convidados'));
     }
+    
 
     public function updateParticipantes(Request $request, $id)
     {

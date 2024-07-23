@@ -32,15 +32,21 @@
                 <td>
                     <a href="{{ route('reuniao.show', $reuniao->id) }}" class="btn btn-info">Ver</a>
                     <a href="{{ route('reuniao.edit', $reuniao->id) }}" class="btn btn-warning">Editar</a>
-                    <form action="{{ route('reuniao.destroy', $reuniao->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Excluir</button>
-                    </form>
+                    <div class="dropdown mt-2">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Lista
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ route('generate-pdf', ['id' => $reuniao->id, 'type' => 'colaboradores']) }}">Colaboradores</a>
+                            <a class="dropdown-item" href="{{ route('generate-participantes-pdf', ['id' => $reuniao->id, 'type' => 'colaboradores-visitantes']) }}">Colaboradores e visitantes</a>
+                        </div>
+                    </div>
+
+
                     <!-- Botão para abrir a modal de participantes -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#participantesModal-{{ $reuniao->id }}">
+                    <!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#participantesModal-{{ $reuniao->id }}">
                         Participantes
-                    </button>
+                    </button> -->
                 </td>
             </tr>
             @endforeach

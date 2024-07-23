@@ -26,6 +26,10 @@ class Reuniao extends Model
     {
         return $this->hasMany(Participante::class, 'reuniao_id');
     }
+    public function convidados()
+    {
+        return $this->hasMany(Convidado::class);
+    }
     public function departamento()
     {
         return $this->belongsToMany(Departamento::class);
